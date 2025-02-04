@@ -1,5 +1,5 @@
 import React from "react";
-
+import PhotoListItem from "./PhotoListItem";
 import "../styles/PhotoList.scss";
 
 const sampleDataForPhotoList = [
@@ -59,7 +59,19 @@ const sampleDataForPhotoList = [
 const PhotoList = () => {
   return (
     <ul className="photo-list">
-      {/* Insert React */}
+      {sampleDataForPhotoList.map((photoData) => (
+        <li key={photoData.id}>
+          <PhotoListItem 
+            photo={{
+              id: photoData.id,
+              imageSource: photoData.urls.regular,
+              location: photoData.location,
+              username: photoData.user.username,
+              profile: photoData.user.profile
+            }} 
+          />
+        </li>
+      ))}
     </ul>
   );
 };

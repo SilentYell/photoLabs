@@ -16,11 +16,11 @@ const PhotoListItem = ({photo}) => {
           alt="Profile"
         />
         <div className="photo-list__user-info">
-          <div className="photo-list__user-location">
-            {photo.location.city}, {photo.location.country}
-          </div>
           <div>
             {photo.username}
+          </div>
+          <div className="photo-list__user-location">
+            {photo.location.city}, {photo.location.country}
           </div>
         </div>
       </div>
