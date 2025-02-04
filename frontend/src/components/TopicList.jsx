@@ -1,5 +1,5 @@
 import React from "react";
-
+import TopicListItem from "./TopicListItem";
 import "../styles/TopicList.scss";
 
 const sampleDataForTopicList = [
@@ -9,13 +9,13 @@ const sampleDataForTopicList = [
     title: "Nature",
   },
   {
-    id: "2",
+    id: "2", 
     slug: "topic-2",
     title: "Travel",
   },
   {
     id: "3",
-    slug: "topic-3",
+    slug: "topic-3", 
     title: "People",
   },
 ];
@@ -23,7 +23,12 @@ const sampleDataForTopicList = [
 const TopicList = () => {
   return (
     <div className="top-nav-bar__topic-list">
-      {/* Insert React */}
+      {sampleDataForTopicList.map((topic) => (
+        <TopicListItem
+          key={topic.id}
+          title={topic.title}
+        />
+      ))}
     </div>
   );
 };
