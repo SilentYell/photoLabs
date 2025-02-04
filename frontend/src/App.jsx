@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PhotoList from './components/PhotoList';
-import TopNavigation from 'components/TopNavigationBar';
+import TopNavigationBar from './components/TopNavigationBar';
 import './App.scss';
 
 const App = () => {
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
+
   return (
     <div className="App">
-      <TopNavigation />
+      <TopNavigationBar favoritePhotos={favoritePhotos} />
       <PhotoList />
     </div>
   );
