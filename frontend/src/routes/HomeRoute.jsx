@@ -1,11 +1,15 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import TopNavigationBar from '../components/TopNavigationBar';
+import PhotoList from '../components/PhotoList';
 import '../styles/HomeRoute.scss';
 
 const HomeRoute = () => {
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
+
   return (
     <div className="home-route">
-      {/* Insert React */}
+      <TopNavigationBar favoritePhotos={favoritePhotos} />
+      <PhotoList />
     </div>
   );
 };
