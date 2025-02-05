@@ -10,7 +10,10 @@ const TopNavigationBar = ({ topics, favoritePhotos }) => {
       <div className="top-nav-bar__content">
         <TopicList topics={topics} />
         <div className="top-nav-bar__fav-badge">
-          <FavBadge isFavPhotoExist={favoritePhotos.length > 0} />
+          <FavBadge 
+            isFavPhotoExist={favoritePhotos.length > 0}
+            favCount={favoritePhotos.length}
+          />
         </div>
       </div>
     </div>
