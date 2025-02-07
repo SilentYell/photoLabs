@@ -4,7 +4,7 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
-const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
+const PhotoDetailsModal = ({ onClose, selectedPhoto, favoritePhotos, toggleFavorite }) => {
   useEffect(() => {
     console.log(selectedPhoto);
   }, [selectedPhoto]);
@@ -34,8 +34,8 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
             alt={`Enlarged view of ${selectedPhoto.user.name}'s photo from ${selectedPhoto.location.city}`}
           />
           <PhotoFavButton 
-            onClick={() => console.log(`Toggle favorite for photo id ${selectedPhoto.id}`)}
-            selected={false}  // Replace with appropriate favorite state if available
+            onClick={() => toggleFavorite(selectedPhoto.id)}
+            selected={favoritePhotos.includes(selectedPhoto.id)}
           />
         </div>
 
@@ -51,9 +51,9 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
             <h4>Similar Photos</h4>
             <PhotoList 
               photos={similarPhotos}
-              toggleFavorite={() => {}}  // Replace with the actual toggle handler if available
-              favorites={[]}             // Replace with the list of favorite photo ids if available
-              onPhotoClick={() => {}}    // Replace with an appropriate handler if needed
+              toggleFavorite={toggleFavorite}  // Use the same handler
+              favorites={favoritePhotos}
+              onPhotoClick={() => {}}         // Update as needed
             />
           </div>
         )}

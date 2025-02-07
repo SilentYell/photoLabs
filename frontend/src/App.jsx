@@ -8,6 +8,16 @@ import './App.scss';
 const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [favoritePhotos, setFavoritePhotos] = useState([]);
+
+  const toggleFavoritePhoto = (photoId) => {
+    setFavoritePhotos(prev => {
+      if (prev.includes(photoId)) {
+        return prev.filter(id => id !== photoId);
+      }
+      return [...prev, photoId];
+    });
+  };
 
   const handlePhotoClick = (photo) => {
     setSelectedPhoto(photo);
@@ -21,15 +31,19 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute
-        photos={photos}
-        topics={topics}
+      <HomeRoute 
+        photos={photos} 
+        topics={topics} 
         onPhotoClick={handlePhotoClick}
+        favoritePhotos={favoritePhotos}
+        toggleFavorite={toggleFavoritePhoto}
       />
       {showModal && (
         <PhotoDetailsModal 
           onClose={handleCloseModal} 
-          selectedPhoto={selectedPhoto} 
+          selectedPhoto={selectedPhoto}
+          favoritePhotos={favoritePhotos}
+          toggleFavorite={toggleFavoritePhoto}
         />
       )}
     </div>
