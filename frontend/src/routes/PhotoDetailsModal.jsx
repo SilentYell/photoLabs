@@ -7,6 +7,8 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
     console.log(selectedPhoto);
   }, [selectedPhoto]);
 
+  if (!selectedPhoto) return null;
+
   return (
     <div className="photo-details-modal">
       <button 
@@ -15,7 +17,35 @@ const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
       >
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      {/* Modal content goes here */}
+
+      <div className="photo-details-modal__content">
+        {/* Main Image */}
+        <img
+          className="photo-details-modal__image"
+          src={selectedPhoto.urls.full}
+          alt="Enlarged view"
+        />
+
+        {/* Header Section */}
+        <div className="photo-details-modal__header">
+          <h3>{selectedPhoto.user.name}</h3>
+          <p>{selectedPhoto.location.title}</p>
+        </div>
+
+        {/* Similar Photos */}
+        {selectedPhoto.similar_photos && (
+          <div className="photo-details-modal__images">
+            {Object.values(selectedPhoto.similar_photos).map(similarPhoto => (
+              <img
+                key={similarPhoto.id}
+                className="photo-details-modal__image"
+                src={similarPhoto.urls.regular}
+                alt="Similar photo"
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
