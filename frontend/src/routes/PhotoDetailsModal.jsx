@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
 const PhotoDetailsModal = ({ onClose, selectedPhoto, favoritePhotos, toggleFavorite }) => {
-  useEffect(() => {
-    console.log(selectedPhoto);
-  }, [selectedPhoto]);
-
   if (!selectedPhoto) return null;
 
   // Convert the similar_photos object into an array if exists
