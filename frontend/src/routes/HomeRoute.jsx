@@ -3,7 +3,7 @@ import TopNavigationBar from '../components/TopNavigationBar';
 import PhotoList from '../components/PhotoList';
 import '../styles/HomeRoute.scss';
 
-const HomeRoute = ({ photos, topics }) => {
+const HomeRoute = ({ photos, topics, onPhotoClick }) => {
   const [favoritePhotos, setFavoritePhotos] = useState([]);
 
   const toggleFavoritePhoto = (photoId) => {
@@ -25,6 +25,7 @@ const HomeRoute = ({ photos, topics }) => {
         photos={photos} 
         toggleFavorite={toggleFavoritePhoto}
         favorites={favoritePhotos}
+        onPhotoClick={onPhotoClick}
       />
     </div>
   );
