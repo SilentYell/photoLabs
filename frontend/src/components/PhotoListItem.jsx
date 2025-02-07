@@ -13,7 +13,7 @@ const PhotoListItem = ({ photo, toggleFavorite, isFavorite, onPhotoClick }) => {
         className="photo-list__image"
         src={photo.urls.regular}
         alt="Photo"
-        onClick={onPhotoClick}
+        onClick={() => onPhotoClick(photo)}
       />
       <div className="photo-list__user-details">
         <img
@@ -22,9 +22,7 @@ const PhotoListItem = ({ photo, toggleFavorite, isFavorite, onPhotoClick }) => {
           alt="Profile"
         />
         <div className="photo-list__user-info">
-          <div>
-            {photo.user.username}
-          </div>
+          <div>{photo.user.username}</div>
           <div className="photo-list__user-location">
             {photo.location.city}, {photo.location.country}
           </div>

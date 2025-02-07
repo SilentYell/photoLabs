@@ -1,8 +1,12 @@
-import React from 'react';
-import '../styles/PhotoDetailsModal.scss'
+import React, { useEffect } from 'react';
+import '../styles/PhotoDetailsModal.scss';
 import closeSymbol from '../assets/closeSymbol.svg';
 
-const PhotoDetailsModal = ({ onClose }) => {
+const PhotoDetailsModal = ({ onClose, selectedPhoto }) => {
+  useEffect(() => {
+    console.log(selectedPhoto);
+  }, [selectedPhoto]);
+
   return (
     <div className="photo-details-modal">
       <button 
