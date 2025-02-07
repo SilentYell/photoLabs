@@ -12,14 +12,18 @@ const App = () => {
     setShowModal(true);
   };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="App">
       <HomeRoute
         photos={photos}
         topics={topics}
-        onPhotoClick={handlePhotoClick} 
+        onPhotoClick={handlePhotoClick}
       />
-      {showModal && <PhotoDetailsModal />}
+      {showModal && <PhotoDetailsModal onClose={handleCloseModal} />}
     </div>
   );
 };
