@@ -2,6 +2,10 @@ import { useReducer, useEffect } from 'react';
 import photosData from '../mocks/photos';
 import topicsData from '../mocks/topics';
 
+/*
+  ACTIONS: Constants representing the various actions that can be dispatched.
+  These constants help avoid typos and provide a single source of truth for action types.
+*/
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
@@ -11,22 +15,32 @@ export const ACTIONS = {
   CLOSE_PHOTO_DETAILS_MODAL: 'CLOSE_PHOTO_DETAILS_MODAL'
 };
 
+/*
+  reducer: A function that receives the current state and an action, and returns the new state.
+  This centralizes all state transitions, making it easier to manage complex state updates.
+*/
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_PHOTO_DATA:
+      // Sets the initial photo data
       return { ...state, photos: action.payload.photos };
     case ACTIONS.SET_TOPIC_DATA:
+      // Sets the initial topics data
       return { ...state, topics: action.payload.topics };
     case ACTIONS.SELECT_PHOTO:
+      // Updates the state with the currently selected photo (for the modal view)
       return { ...state, selectedPhoto: action.payload.photo };
     case ACTIONS.CLOSE_PHOTO_DETAILS_MODAL:
+      // Closes the modal by resetting the selected photo
       return { ...state, selectedPhoto: null };
     case ACTIONS.FAV_PHOTO_ADDED:
+      // Adds a photo id to the list of favorite photos
       return {
         ...state,
         favoritePhotos: [...state.favoritePhotos, action.payload.id]
       };
     case ACTIONS.FAV_PHOTO_REMOVED:
+      // Removes a photo id from the list of favorite photos
       return {
         ...state,
         favoritePhotos: state.favoritePhotos.filter(id => id !== action.payload.id)
@@ -36,7 +50,18 @@ function reducer(state, action) {
   }
 }
 
+/*
+  useApplicationData: Custom hook that manages the application state using the useReducer Hook.
+  
+  It returns an object containing:
+  - state: The current state of the application.
+  - onPhotoSelect: Function to set a photo as selected (e.g., when opening the modal).
+  - updateToFavPhotoIds: Function to toggle a photo in the favorites list.
+  - onClosePhotoDetailsModal: Function to close the photo details modal.
+  - onLoadTopic: Function to update the topics data (if needed).
+*/
 const useApplicationData = () => {
+  // Initialize state using useReducer with the reducer defined above
   const [state, dispatch] = useReducer(reducer, {
     photos: [],
     topics: [],
@@ -44,7 +69,10 @@ const useApplicationData = () => {
     favoritePhotos: []
   });
 
-  // Load initial data from mocks (or an API)
+  /*
+    useEffect: Loads initial data into the state when the component mounts.
+    Dispatches actions to set the photo and topic data.
+  */
   useEffect(() => {
     dispatch({
       type: ACTIONS.SET_PHOTO_DATA,
@@ -57,7 +85,10 @@ const useApplicationData = () => {
     });
   }, []);
 
-  // When a photo is selected in the UI (for modal view)
+  /*
+    onPhotoSelect: Handler used when a user selects a photo.
+    Dispatches a SELECT_PHOTO action to update the state with the selected photo.
+  */
   const onPhotoSelect = (photo) => {
     dispatch({
       type: ACTIONS.SELECT_PHOTO,
@@ -65,7 +96,10 @@ const useApplicationData = () => {
     });
   };
 
-  // Toggle favorite photos by dispatching an "add" or "remove" action
+  /*
+    updateToFavPhotoIds: Handler used to toggle the favorite status of a photo.
+    If the photo is already favorited, it dispatches an action to remove it; otherwise, it adds it.
+  */
   const updateToFavPhotoIds = (photoId) => {
     if (state.favoritePhotos.includes(photoId)) {
       dispatch({
@@ -80,12 +114,18 @@ const useApplicationData = () => {
     }
   };
 
-  // Close the modal by deselecting the current photo
+  /*
+    onClosePhotoDetailsModal: Handler used to close the photo details modal.
+    Resets the selectedPhoto in the state.
+  */
   const onClosePhotoDetailsModal = () => {
     dispatch({ type: ACTIONS.CLOSE_PHOTO_DETAILS_MODAL });
   };
 
-  // If you need to load topics separately
+  /*
+    onLoadTopic: Handler used to update the topics data.
+    Useful if you load topics separately from the initial load.
+  */
   const onLoadTopic = (topics) => {
     dispatch({
       type: ACTIONS.SET_TOPIC_DATA,
