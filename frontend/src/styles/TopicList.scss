@@ -1,7 +1,31 @@
+.top-nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px;
+  align-items: center;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+  height: 72px;
+}
+
+.top-nav-bar__logo {
+  text-decoration: overline;
+  font-weight: 500;
+  font-size: 24px;
+  color: #111;
+  text-underline-position: auto;
+  margin-left: 24px;
+}
+
 .top-nav-bar__topic-list {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-right: 24px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
 }

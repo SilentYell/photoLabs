@@ -1,37 +1,113 @@
 .photo-details-modal {
-  background-color: white;
-  box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
-  position: absolute;
-  top: 55%;
+  position: fixed; /* use fixed to keep it centered while scrolling */
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -40%);
-  height: 80%;
-  width: 55%;
-  overflow-y: scroll;
-  border-radius: 12px;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  padding: 16px;
+  background: #f8f9fa;
+  max-height: 90vh;  // ensure it doesn't grow too tall
+  overflow-y: auto;
 }
 
 .photo-details-modal__close-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
   background-color: white;
   border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
   cursor: pointer;
-  margin-left: 16px;
-  margin-top: 16px;
+  z-index: 10;
+}
+
+.photo-details-modal__content {
+  padding: 16px;
+}
+
+.photo-details-modal__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* New wrapper to force same width for image and profile bar */
+.photo-details-modal__image-wrapper {
+  width: 100%;
+}
+
+.photo-details-modal__image-container {
+  width: 100%;
+  border-radius: 8px 8px 0 0; // Top rounded corners
+  overflow: hidden;
+}
+
+.photo-details-modal__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0; // Remove border-radius in modal view as per design
+}
+
+.photo-details-modal__profile-bar {
+  width: 100%;  // Make it the same width as its parent
+  padding: 8px 16px; // 8px vertical, 16px horizontal
+  margin: 24px 0;  // spacing as required
+  border-top: 2px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+}
+
+.photo-details-modal__user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.photo-details-modal__user-info {
+  // Align with "Profile Name" styling
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.photo-details-modal__related {
+  margin-top: 24px;
+}
+
+.photo-details-modal__related h4 {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+/* Ensure similar photos grid 3 across */
+.photo-list {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px; // Increased gap for "Density: 100 meters"
+}
+
+.photo-list__item {
+  // Match "Box border-radius" feedback
+  border-radius: 12px;
+  // Add "Special Steam Efficiency" shadow effect
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: #ffffff;
+  border-color: #d1d5db; // Updated border color
+}
+
+/* For similar photos within the modal, if they need to be smaller */
+.photo-details-modal__related .photo-list__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0; // Depending on design, you might want them rounded
 }
 
 .photo-details-modal__images {
   margin-left: 36px;
   margin-top: 8px;
-}
-
-.photo-details-modal__image {
-  max-width: 95%;
-  border-radius: 8px;
 }
 
 .photo-details-modal__top-bar {
@@ -49,17 +125,19 @@
 }
 
 .photo-details-modal__header {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
-  color: #1e1e1e;
-  margin-top: 24px;
+  color: #2563eb;
+  margin-top: 16px;
   margin-bottom: 24px;
   width: 90%;
 }
 
 .photo-details-modal__photographer-location {
+  font-size: 14px;
   color: #838383;
 }
+
 .photo-details-modal__photographer-profile {
   object-fit: cover;
   border-radius: 100%;
@@ -74,4 +152,18 @@
   font-weight: 700;
   font-size: 12px;
   margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .photo-details-modal {
+    width: 90%; // Better mobile handling
+    height: auto;
+    max-height: 90vh;
+  }
+  
+  // Stack elements for mobile per "surface area" note
+  .photo-details-modal__profile-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
