@@ -13,6 +13,7 @@
   flex-direction: row;
   align-items: center;
   gap: 24px;
+  margin-right: 24px;
 }
 
 .top-nav-bar__logo {
@@ -25,5 +26,13 @@
 }
 
 .top-nav-bar__fav-badge {
+  cursor: pointer;
   margin-left: 24px;
+}
+
+.top-nav-bar__brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 24px;
+  color: #111;
 }

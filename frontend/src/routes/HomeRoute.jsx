@@ -9,14 +9,16 @@ const HomeRoute = ({
   onPhotoClick, 
   favoritePhotos, 
   toggleFavorite, 
-  onTopicSelect // new prop added
+  onTopicSelect,
+  toggleLikedPhotos
 }) => {
   return (
     <div className="home-route">
       <TopNavigationBar 
         topics={topics}
         favoritePhotos={favoritePhotos} 
-        onTopicSelect={onTopicSelect}  // pass the handler down
+        onTopicSelect={onTopicSelect}
+        toggleLikedPhotos={toggleLikedPhotos}
       />
       <PhotoList 
         photos={photos} 
