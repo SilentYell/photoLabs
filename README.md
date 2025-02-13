@@ -25,10 +25,6 @@ Below are a few screenshots highlighting the core features of PhotoLabs:
 ![Filtered by Topic](./docs/filtered_by_topic.png)
 *Clicking on a topic filters the photos by that category.*
 
-### Favorited Images
-![Favorited Images](./docs/favorited_items.png)
-*Favorited images are indicated by the heart icon and update across the navigation.*
-
 ### Preview Images
 ![Preview Images](./docs/preview_image.png)
 *Previewing an image by clicking one.*
