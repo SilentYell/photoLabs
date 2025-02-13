@@ -1,6 +1,4 @@
 import { useReducer, useEffect } from 'react';
-import photosData from '../mocks/photos';
-import topicsData from '../mocks/topics';
 
 /*
   ACTIONS: Constants representing the various actions that can be dispatched.
@@ -22,8 +20,7 @@ export const ACTIONS = {
 function reducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_PHOTO_DATA:
-      // Sets the initial photo data
-      return { ...state, photos: action.payload.photos };
+      return { ...state, photos: action.payload };
     case ACTIONS.SET_TOPIC_DATA:
       // Sets the initial topics data
       return { ...state, topics: action.payload.topics };
@@ -46,7 +43,7 @@ function reducer(state, action) {
         favoritePhotos: state.favoritePhotos.filter(id => id !== action.payload.id)
       };
     default:
-      throw new Error(`Tried to reduce with unsupported action type: ${action.type}`);
+      throw new Error(`Unsupported action type: ${action.type}`);
   }
 }
 
@@ -74,15 +71,19 @@ const useApplicationData = () => {
     Dispatches actions to set the photo and topic data.
   */
   useEffect(() => {
-    dispatch({
-      type: ACTIONS.SET_PHOTO_DATA,
-      payload: { photos: photosData }
-    });
+    fetch("/api/photos")
+      .then(response => response.json())
+      .then(data => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
+      });
+  }, []);
 
-    dispatch({
-      type: ACTIONS.SET_TOPIC_DATA,
-      payload: { topics: topicsData }
-    });
+  useEffect(() => {
+    fetch("/api/topics")
+      .then(response => response.json())
+      .then(data => {
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: { topics: data } });
+      });
   }, []);
 
   /*
